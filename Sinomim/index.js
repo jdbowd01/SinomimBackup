@@ -1,10 +1,11 @@
 var express = require('express');
 var path = require('path');
-var steamCollect = require('./public/script.js')
 
 var app = express();
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('views', __dirname+'/views');
 app.use(express.static(path.join(__dirname+'/public')));
-
 app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'OPTIONS,GET,PUT,POST,DELETE');
@@ -13,9 +14,18 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', function(req, res) {
-  res.send({
-    results: steamCollect.methods.findUser(76561198000000000)
+  res.render('index', {
+
   });
+});
+app.get('/nameList', function(req, res) {
+  res.sendFile(__dirname + '/views/nameList.html');
+});
+app.get('/nameDetails/:nameID', function(req, res) {
+  res.sendFile(__dirname + '/views/nameDetails.html');
+});
+app.get('/profile/:profileID?', function(req, res) {
+  res.sendFile(__dirname + '/views/profile.html');
 });
 
 app.listen(3000);

@@ -1,7 +1,7 @@
 {
   "name": "sinomim",
   "version": "1.0.0",
-  "description": "",
+  "description": "Project to create Sinomim in.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -10,9 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.3",
-    "mongodb": "^3.1.4",
-    "mongoose": "^5.2.14",
-    "steamapi": "^2.0.2",
-    "steamrep": "^1.0.1"
+    "mongodb": "^3.1.6",
+    "mongoose": "^5.3.1",
+    "pug": "^2.0.3"
   }
 }
