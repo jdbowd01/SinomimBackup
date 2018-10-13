@@ -1,0 +1,30 @@
+header {
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #000;
+}
+.navtab {
+  width: 25%;
+  list-style-type: none;
+  text-align: center;
+}
+.navtab a {
+  color: #000;
+  text-decoration: none;
+}
+.importantText {
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+}
+
+#logo {
+  height: 30px;
+  margin: 5px;
+  width: auto;
+}
+#navbar {
+  display: flex;
+  flex-direction: row;
+  margin-left: 60%; 
+  width: 40%;
+  height: 40px;
+}

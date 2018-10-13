@@ -15,9 +15,7 @@ const SteamUser = new Schema({
 });
 const UserModel = mongoose.model('SteamUserData', SteamUser);
 
-var pageAmount = 10;
 var foundUsers = [];
-var checkNum = 76561198000000000;
 
 methods = {
   findUser: function(steamUser) {
@@ -33,61 +31,30 @@ methods = {
     //   });
     // });
 
-    // console.log(steamUser);
-    SteamRep.getProfile(steamUser.toString(), function(error, result) {
+    //100,000 calls per day, use 10,000 just to be safe, and only run this one every day or every other day
+    var longNum = '76561' + steamUser.toString();
+    SteamRep.getProfile(longNum, function(error, result) {
       if(error === null) {
-        steam.getUserSummary(steamUser.toString()).then(sum => {
+        steam.getUserSummary(longNum.toString()).then(sum => {
           var user = new UserModel ({
             nickname: sum.nickname,
             steamID: sum.steamID,
             lastActivity: sum.lastLogOff * 1000
           });
+          console.log(user + "\n");
           methods.findActivity(user);
         });
-        // THIS IS THE LINE THAT NEEDS TO BE LOOKED AT, DOESN'T EVER MOVE ON
-        // methods.findUser(steamUser + 1);
+        methods.findUser(steamUser + 1);
       } else {
-        // methods.findUser(steamUser + 1);
+        methods.findUser(steamUser + 1);
       }
     });
-
-    // while(foundUsers.length < pageAmount) {
-    //   try {
-    //     steam.getUserSummary(checkNum.toString()).then(sum => {
-    //       var user = new UserModel ({
-    //         nickname: sum.nickname,
-    //         steamID: sum.steamID,
-    //         lastActivity: sum.lastLogOff * 1000
-    //       });
-    //       methods.findActivity(user);
-    //     }).catch(e => console.log(e));
-    //   } catch (e) { 
-    //     console.log("error: " + e) 
-    //   } 
-    //   finally {
-    //     console.log(checkNum + ' checked')
-    //   }
-    // }
-    
-    // while(foundUsers.length < pageAmount) {
-    //   console.log(checkNum);
-    //   steam.getUserSummary(checkNum.toString()).then(sum => {
-    //     var user = new UserModel ({
-    //       nickname: sum.nickname,
-    //       steamID: sum.steamID,
-    //       lastActivity: sum.lastLogOff * 1000
-    //     });
-    //     methods.findActivity(user);
-    //   }).catch(e => console.log(e));
-    // }
-    // console.log(foundUsers);
   },
   findActivity: function(user) {
     var now = new Date().getTime();
     //should check if user has been inactive for over a month.
-    console.log('checking: ' + user.lastActivity);
     if(user.lastActivity < now - 2592000000) {
-      console.log(new Date(user.lastActivity));
+      // console.log(new Date(user.lastActivity));
       foundUsers.push(user);
       // user.save();
     }
