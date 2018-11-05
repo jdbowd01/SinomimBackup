@@ -1,0 +1,88 @@
+html
+  head
+    title Sinomim List
+    link(href='/css/css-reset.css', rel='stylesheet')
+    link(href='/css/styles.css', rel='stylesheet')
+    link(href='/css/marketStyle.css', rel='stylesheet')
+    link(href='https://use.fontawesome.com/releases/v5.4.1/css/all.css', rel='stylesheet', 
+    integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz', crossorigin='anonymous')
+  body
+    header.flexRow
+      section#logoHold
+        a(href='/')
+          img#logo(src='/images/Logo1.png')
+      ul#navbar
+        a.navtab.unselectedTab(href="/"): li Home
+        a.navtab(href="nameList"): li Market
+        a.navtab.unselectedTab(href="about"): li About
+        a.navtab.unselectedTab(href="../login"): li Profile 
+    #market
+      #platformChoice
+        #selectBtns
+          section#selectAll.btnStyle.importantText Select All
+          section#selectNone.btnStyle.importantText Select None
+        #imageSelectHold
+          .imageSelectHold
+            img.imageSelect(src='/images/Logo1.png')
+          .imageSelectHold
+            img.imageSelect(src='/images/Logo2.png')
+          .imageSelectHold
+            img.imageSelect(src='/images/Logo3.png')
+          .imageSelectHold
+            img.imageSelect(src='/images/Logo4.png')
+        #selectArrows
+          img#upArrow.arrowBtn(src='/images/arrow.png')
+          img#downArrow.arrowBtn(src='/images/arrow.png')
+      #nameMarket.flexRow
+        #nameFilter
+          #nameSearch.flexRow.marginAuto
+            p.importantText Search for:
+            input(type=text, onKeyUp='changePage()')
+          #namePagination.flexRow.marginAuto
+            p.importantText Entries per page:
+            select#pageNum(name=perPage, onChange='changePage()')
+              option(value=5) 5
+              option(value=10) 10
+              option(value=20) 20
+              option(value=50) 50
+          #nameOrder.marginAuto.center-text
+            p.importantText Order By:
+            .nameOrderOption.flexRow.marginAuto
+              input(type='radio', name='orderBy', value='username', onChange='changePage()', checked)
+              p Username
+            .nameOrderOption.flexRow.marginAuto
+              input(type='radio', name='orderBy', value='lastActivity', onChange='changePage()')
+              p Last Activity
+            .nameOrderOption.flexRow.marginAuto
+              input(type='radio', name='orderBy', value='application', onChange='changePage()')
+              p Application
+          #nameBidbuy.marginAuto.center-text
+            p.importantText Buy or Bid?
+            .bidbuyOption.flexRow.marginAuto
+              input(type='radio', name='bidbuy', value='both', onChange='changePage()', checked)
+              p Both
+            .bidbuyOption.flexRow.marginAuto
+              input(type='radio', name='bidbuy', value='bid', onChange='changePage()')
+              p Bid
+            .bidbuyOption.flexRow.marginAuto
+              input(type='radio', name='bidbuy', value='buy', onChange='changePage()')
+              p Buy
+        #nameDisplayHolder
+          #nameSelect.center-text
+            - for(var i = 0; i < users.length; i++) {
+              - if(i < paginate) {
+                section.usernameSale(data-json=users[i])
+                  a(href=`/nameDetails/${users[i]._id}`)= users[i].nickname
+              - } else {
+                section.usernameSale.notOnPage(data-json=users[i])
+                  a(href=`/nameDetails/${users[i]._id}`)= users[i].nickname
+              - }
+            - } 
+          #namePaginationMove.flexRow
+            input(type='number', value=1, min=1, max=1, onChange='changePage()')
+            p of 1
+        #nameDetail
+
+    script.
+      var users = #{users.length};
+    script(src='scripts/market.js')

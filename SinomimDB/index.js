@@ -14,7 +14,7 @@ app.use(function(req, res, next) {
 
 app.get('/', function(req, res) {
   res.send({
-    results: steamCollect.methods.findUser(198000000000)
+    results: steamCollect.methods.startUser()
   });
 });
 

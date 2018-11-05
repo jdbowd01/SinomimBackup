@@ -1,0 +1,63 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+input::placeholder {
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  font: bolder;
+  text-align: center;
+}
+header {
+  flex: 0 1 40px;
+}
+
+.errorMsg {
+  padding: 3px;
+  border: 2px solid #f00;
+  border-radius: 10px;
+}
+.signUpRow {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  margin: 0% auto;
+}
+.loginInput {
+  width: 30%;
+  padding: 5px;
+  margin: 2% auto;
+}
+
+#errorField {
+  flex: 0 1 30%;
+  display: flex;
+  flex-direction: column;
+}
+#loginArea {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+}
+#loginSignUp {
+  display: flex;
+  flex-direction: row;
+  width: 30%;
+  margin: 0% auto;
+  margin-top: 3%;
+}
+#logIn {
+  width: fit-content;
+  font-size: 25;
+  padding: 14px;
+  margin-right: auto;
+}
+#noAccount {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#signUp {
+  width: fit-content;
+  padding: 4px;
+  margin: 0% auto;
+}

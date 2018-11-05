@@ -1,0 +1,45 @@
+html
+  head
+    title Sinomim Log In
+    link(href='/css/css-reset.css', rel='stylesheet')
+    link(href='/css/styles.css', rel='stylesheet')
+    link(href='/css/profileStyle.css', rel='stylesheet')
+  body
+    header.flexRow
+      section#logoHold
+        a(href='/')
+          img#logo(src='/images/Logo1.png')
+      ul#navbar
+        a.navtab.unselectedTab(href="../"): li Home
+        a.navtab.unselectedTab(href="../nameList"): li Market
+        a.navtab.unselectedTab(href="../about"): li About
+        a.navtab(href="../login"): li Profile
+    #userHold
+      #userInfo
+        .userInfoRow
+          h1.importantText Username
+          h2= profile.username
+        .userInfoRow
+          h1.importantText Date Created
+          h2= profile.dateCreated.toUTCString()
+        .userInfoRow
+          .changeable.flexRow
+            h1.importantText Email
+            section#emailChange.changeBtn.btnStyle.importantText Change
+          h2= profile.email
+        .userInfoRow        
+          section#passChange.changeBtn.btnStyle.importantText Change Password
+          section#deleteAccount.changeBtn.btnStyle.importantText Delete Account
+      #userTables
+        table#transactionTable
+          tr
+            td.importantText Name
+            td.importantText Platform
+            td.importantText Sold For
+          //- - for(var i = (names.length - 4 > 0) ? names.length - 4 : 0; i < names.length - 1; i++) {
+          //-   tr
+          //-     td=names[i]
+          //- - }
+        table#ownedTable
+    script(src='scripts/profile.js')
+      

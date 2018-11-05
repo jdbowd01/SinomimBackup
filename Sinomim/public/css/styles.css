@@ -1,30 +1,69 @@
-header {
+a {
+  color: #000;
+  text-decoration: none;
+}
+h1 {
+  font-size: 40px;
+}
+h2 {
+  font-size: 28px;
+}
+h4 {
+  font-size: 20px;
+}
+input:focus, select:focus, textarea:focus, button:focus {
+  outline: none;
+}
+
+.flexRow {
   display: flex;
   flex-direction: row;
-  border-bottom: 1px solid #000;
+}
+.btnStyle {
+  text-align: center;
+  background-color: #4188f9;
+  border: 2px solid #000;
+  cursor: pointer;
 }
 .navtab {
   width: 25%;
   list-style-type: none;
   text-align: center;
-}
-.navtab a {
-  color: #000;
-  text-decoration: none;
+  border: 2px solid #000;
+  border-bottom: 0px solid #81ef87;
+  border-radius: 17px 0px 0px 0px;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(246, 249, 255, 1) 10.54%, 
+  rgba(222, 234, 254, 1) 27.73%, rgba(182, 209, 253, 1) 49.44%, rgba(127, 175, 251, 1) 74.72%, 
+  rgba(65, 136, 249, 1) 100%);
 }
 .importantText {
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
 }
+.unselectedTab {
+  border-bottom: 2px solid #000;
+  background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(237, 237, 174, 1) 100%);
+}
+.center-text {
+  text-align: center;
+}
+.marginAuto {
+  margin: 0% auto;
+}
 
+#logoHold {
+  flex: 40;
+  border-bottom: 2px solid #000;
+  height: 38px;
+}
 #logo {
   height: 30px;
   margin: 5px;
+  margin-right: auto;
   width: auto;
 }
 #navbar {
   display: flex;
   flex-direction: row;
-  margin-left: 60%; 
-  width: 40%;
+  flex: 60;
   height: 40px;
 }

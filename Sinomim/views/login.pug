@@ -1,0 +1,32 @@
+html
+  head
+    title Sinomim Log In
+    link(href='/css/css-reset.css', rel='stylesheet')
+    link(href='/css/styles.css', rel='stylesheet')
+    link(href='/css/loginStyle.css', rel='stylesheet')
+  body
+    header.flexRow
+      section#logoHold
+        a(href='/')
+          img#logo(src='/images/Logo1.png')
+      ul#navbar
+        a.navtab.unselectedTab(href="../"): li Home
+        a.navtab.unselectedTab(href="../nameList"): li Market
+        a.navtab.unselectedTab(href="../about"): li About
+        a.navtab(href="../login"): li Profile 
+    #errorField
+      - if(error != null) {
+        - for(var i = 0; i < error.length; i++) {
+          p.errorMsg= error[i].msg
+        - }
+      - }
+    form#loginArea(action='login', method='Post')
+      input#usernameFill.loginInput(type='text', placeholder='Username or Email Address', name='user', autocomplete='off')
+      input#passwordFill.loginInput(type='password', placeholder='Password', name='pass')
+      #loginSignup
+        input#logIn.btnStyle.importantText(type='submit', value='Sign In')
+        #noAccount
+          p Don't have an account already?
+          a(href='/signup')
+            section#signUp.btnStyle.importantText Sign up here!
+    script(src='scripts/login.js')

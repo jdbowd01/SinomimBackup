@@ -1,0 +1,136 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+body {
+  display: flex;
+  flex-direction: column;
+}
+header {
+  flex: 0 1 40px;
+}
+h3 {
+  border-bottom: .5px solid #000;
+}
+
+.imageSelectHold {
+  display: flex;
+  width: auto;
+  height: 80px;
+  cursor: pointer;
+  margin: 0% auto;
+  justify-content: center;
+}
+.imageSelect {
+  max-height: 85%;
+  max-width: 85%;
+  padding: 7.5%;
+  object-fit: contain;
+}
+.arrowBtn {
+  width: auto;
+  height: 30%;
+  cursor: pointer;
+  margin: auto;
+}
+.usernameSale {
+  break-inside: avoid-column;
+  width: 85px;
+  background-color: #4188f9;
+  cursor: pointer;
+  border: .5px solid #000;
+  margin: 0% auto;
+  margin-bottom: 10px;
+}
+.usernameSale a {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  font-size: 14;
+  padding: 7px;
+}
+.notOnPage { 
+  display: none;
+}
+
+#market {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  margin: 0;
+}
+#platformChoice {
+  flex: 0 1 80px;
+  display: flex;
+  flex-direction: row;
+  height: 80px;
+  border-bottom: .5px solid #000;
+  margin-top: 2.5px;
+}
+#selectBtns {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+}
+#selectAll, #selectNone {
+  width: 50%;
+  padding: 1%;
+  margin: auto;
+  font-size: 11px;
+}
+#imageSelectHold {
+  flex: 10;
+  display: flex;
+}
+#selectArrows {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+#downArrow {
+  transform: rotate(180deg);
+}
+#nameMarket {
+  flex: 1 1 auto;
+}
+#nameFilter {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000;
+  margin: 3%;
+  justify-content: space-around;
+}
+#nameSearch input {
+  margin-left: 5px;
+}
+#namePagination select {
+  margin-left: 5px;
+}
+#nameDisplayHolder {
+  flex: 2;
+}
+#nameSelect {
+  margin-top: 2%;
+  column-count: 1;
+  column-width: 75px;
+}
+#nameDetail {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  border: 1px solid #000;
+  margin: 3%;
+}
+#namePaginationMove {
+  width: fit-content;
+  margin: 0% auto;
+  margin-top: 15px;
+}
+#namePaginationMove input {
+  width: 100px;
+  margin-right: 10px;
+}

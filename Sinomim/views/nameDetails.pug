@@ -1,0 +1,49 @@
+html
+  head
+    title #{user.nickname}'s Detail
+    link(href='/css/css-reset.css', rel='stylesheet')
+    link(href='/css/styles.css', rel='stylesheet')
+    link(href='/css/detailStyle.css', rel='stylesheet')
+  body
+    header.flexRow
+      section#logoHold
+        a(href='/')
+          img#logo(src='/images/Logo1.png')
+      ul#navbar
+        a.navtab.unselectedTab(href="/"): li Home
+        a.navtab.unselectedTab(href="../nameList"): li Market
+        a.navtab.unselectedTab(href="../about"): li About
+        a.navtab.unselectedTab(href="../login"): li Profile 
+    #detailPage
+      #nameInfo
+        #nameDetails
+          - if(user.buy) {
+          .buyTab
+            h1.importantText Name
+            h2= user.nickname
+          .buyTab
+            h1.importantText Platform
+            h2= user.platform
+          .buyTab
+            h1.importantText Price
+            h2= user.price.toFixed(2)
+          - } else {
+          .bidTab
+            h1.importantText Name
+            h2= user.nickname
+          .bidTab
+            h1.importantText Platform
+            h2= user.platform
+          .bidTab
+            h1.importantText Buyout Price
+            h2= user.price.toFixed(2)
+          .bidTab
+            h1.importantText PAGE IN PROGRESS
+          - }
+        #nameBargains
+          h1.importantText Bargains Denied
+          table
+            //- Here's where that bargains stuff comes in
+      #nameOffers
+        section#buyBtn.offerBtn.btnStyle Buy Name
+        section#barginBtn.offerBtn.btnStyle Bargain

@@ -1,0 +1,15 @@
+#homeTitle {
+  margin: 6% 0% 1% 0%;
+  font-size: 90px;
+  text-align: center;
+}
+#homeDesc {
+  font-size: 20px;
+  text-align: center;
+}
+#exploreBtn {
+  width: 150px;
+  font-size: 22px;
+  padding: 1%;
+  margin: 17% auto 0% auto;
+}

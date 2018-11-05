@@ -3,15 +3,17 @@ html
     title Sinomim Home
     link(href='/css/css-reset.css', rel='stylesheet')
     link(href='/css/styles.css', rel='stylesheet')
+    link(href='/css/indexStyle.css', rel='stylesheet')
   body
-    header
-      img#logo(src='/images/Logo1.png')
+    header.flexRow
+      section#logoHold
+        a(href='/')
+          img#logo(src='/images/Logo1.png')
       ul#navbar
-        li.navtab: a(href="/") Home
-        li.navtab: a(href="nameList") Market
-        li.navtab: a(href="about") About
-        li.navtab: a(href="profile/") Profile 
-        //-need to get who is logged in here
-    h1#homeTitle.importantText Sinonmim
+        a.navtab(href="/"): li Home
+        a.navtab.unselectedTab(href="nameList"): li Market
+        a.navtab.unselectedTab(href="about"): li About
+        a.navtab.unselectedTab(href="../login"): li Profile 
+    h1#homeTitle.importantText Sinomim
     h4#homeDesc.importantText The Name Trade Station
-    section#exploreBtn.btnStyle.importantText Explore
+    a(href="nameList"): section#exploreBtn.btnStyle.importantText Explore

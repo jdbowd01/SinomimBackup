@@ -1,0 +1,45 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+header {
+  flex: 0 1 40px;
+}
+table {
+  border-collapse: collapse;
+}
+table, th, td {
+  border: 1px solid black;
+}
+
+.userInfoRow {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.changeBtn {
+  height: fit-content;
+  width: fit-content;
+  padding: 4px 7px;
+  margin: auto 1%;
+}
+
+#userHold {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: row;
+  margin: 0% 1%;
+}
+#userInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+#userTables {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
