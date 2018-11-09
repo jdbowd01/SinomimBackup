@@ -1,0 +1,27 @@
+html
+  head
+    title Sinomim Home
+    link(href='/css/css-reset.css', rel='stylesheet')
+    link(href='/css/styles.css', rel='stylesheet')
+    link(href='/css/purchaseStyle.css', rel='stylesheet')
+  body.flexCol
+    header.flexRow
+      section#logoHold
+        a(href='/')
+          img#logo(src='/images/Logo1.png')
+      ul#navbar
+        a.navtab.unselectedTab(href="/"): li Home
+        a.navtab(href="../nameList"): li Market
+        a.navtab.unselectedTab(href="about"): li About
+        a.navtab.unselectedTab(href="../login"): li Profile 
+    form(action=`/purchase/${user._id}`, method="post")
+      h1.importantText.center-text=user.nickname
+      #info.flexRow.marginAuto
+        .flexCol
+          h2.center-text Price
+          p.center-text='$'+user.price.toFixed(2)
+        .flexCol
+          h2.center-text Platform
+          p.center-text=user.platform
+      script(src="//checkout.stripe.com/v2/checkout.js", class="stripe-button", data-key=keyPublishable,
+      data-locale="auto", data-description=`Purchase of ${user.nickname}`, data-amount=(user.price*100))

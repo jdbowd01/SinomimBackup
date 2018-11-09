@@ -1,22 +1,23 @@
-body {
-  display: flex;
-  flex-direction: column;
-}
 header {
   flex: 0 1 40px;
 }
 table {
+  width: 100%;
   border-collapse: collapse;
 }
 table, th, td {
+  font-size: 20px;
+  padding: 5px;
   border: 1px solid black;
 }
+input::placeholder {
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  font: bolder;
+  text-align: center;
+}
 
-.userInfoRow {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+.btnStyle {
+  border: 1px solid #000;
 }
 .changeBtn {
   height: fit-content;
@@ -24,22 +25,57 @@ table, th, td {
   padding: 4px 7px;
   margin: auto 1%;
 }
+.tableTitle {
+  font-weight: bold;
+}
+.userInfoRow, .userEdit {
+  justify-content: center;
+}
+.ownedData {
+  height: 31px;
+}
+.emailInput, .passInput {
+  width: 70%;
+}
+.dangerous {
+  margin: .5% auto;
+  height: fit-content;
+  width: fit-content;
+  padding: 8px 14px;
+}
 
 #userHold {
   flex: 1 1 auto;
-  display: flex;
-  flex-direction: row;
   margin: 0% 1%;
 }
-#userInfo {
+#userInfo, #userTables {
   flex: 1;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
 }
-#userTables {
+#transactionTitle, #ownedTitle {
+  justify-content: center;
+}
+#transactionTable, #ownedTable {
   flex: 1;
-  display: flex;
+}
+#emailChangeForm, #passChangeForm, #addNameForm, #displayAllNames, #displayAllTransactions {
+  display: none;
   flex-direction: column;
-  justify-content: space-around;
+  position: fixed;
+  height: 70%;
+  width: 50%;
+  background-color: #fff;
+  border: 2px solid #000;
+  border-radius: 6px;
+  top: 15%;
+  right: 25%;
+  z-index: 2;
+  text-align: center;
+  justify-content: space-evenly;
+}
+#emailChangeSubmit, #passChangeSubmit {
+  width: fit-content;
+}
+#dangerousOptions {
+  flex: 0 1 fit-content;
 }

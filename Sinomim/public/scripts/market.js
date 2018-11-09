@@ -24,10 +24,6 @@ selectPics[2].addEventListener('click', function() {
 selectPics[3].addEventListener('click', function() {
   highlightborder(3);
 });
-for(var i = 0; i < names.length; i++) {
-  names[i].children[0].addEventListener('mouseover', displayNameDetail);
-  names[i].children[0].addEventListener('mouseout', deleteNameDetail);
-}
 
 function highlightborder(borders) {
   if(borders === 'all') {
@@ -201,7 +197,10 @@ function displayNameDetail(evt) {
 }
 
 function deleteNameDetail(evt) {
-  document.getElementById('nameDetail').innerHTML = '';
+  document.getElementById('nameDetail').innerHTML = `<h2 class="importantText center-text welcomeText">Welcome to the marketplace!</h2>
+  <p class="center-text welcomeText">The blue buttons you see in the center are the names, hover over them!</p>
+  <p class="center-text welcomeText">Above those is the platform selection. 
+  If you are looking for a name from a certain place, select it there!</p>`;
 }
 
 changePage();

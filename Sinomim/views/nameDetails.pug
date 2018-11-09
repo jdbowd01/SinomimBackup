@@ -4,23 +4,26 @@ html
     link(href='/css/css-reset.css', rel='stylesheet')
     link(href='/css/styles.css', rel='stylesheet')
     link(href='/css/detailStyle.css', rel='stylesheet')
-  body
+  body.flexCol
     header.flexRow
       section#logoHold
         a(href='/')
           img#logo(src='/images/Logo1.png')
       ul#navbar
         a.navtab.unselectedTab(href="/"): li Home
-        a.navtab.unselectedTab(href="../nameList"): li Market
+        a.navtab(href="../nameList"): li Market
         a.navtab.unselectedTab(href="../about"): li About
         a.navtab.unselectedTab(href="../login"): li Profile 
-    #detailPage
-      #nameInfo
-        #nameDetails
+    #detailPage.flexCol
+      #nameInfo.flexRow
+        #nameDetails.flexCol
           - if(user.buy) {
           .buyTab
             h1.importantText Name
             h2= user.nickname
+          .buyTab
+            h1.importantText Owner
+            h2= user.owner.username
           .buyTab
             h1.importantText Platform
             h2= user.platform
@@ -32,18 +35,26 @@ html
             h1.importantText Name
             h2= user.nickname
           .bidTab
+            h1.importantText Owner
+            h2= user.owner.username
+          .bidTab
             h1.importantText Platform
             h2= user.platform
           .bidTab
             h1.importantText Buyout Price
             h2= user.price.toFixed(2)
-          .bidTab
-            h1.importantText PAGE IN PROGRESS
           - }
         #nameBargains
           h1.importantText Bargains Denied
           table
             //- Here's where that bargains stuff comes in
-      #nameOffers
-        section#buyBtn.offerBtn.btnStyle Buy Name
-        section#barginBtn.offerBtn.btnStyle Bargain
+      #nameOffers.flexRow
+        - if(user.buy) {
+          a(href=`../namePurchase/${user._id}`).offerBtn.btnStyle
+            section#buyBtn Buy Name
+          a(href=`../namePurchase/${user._id}`).offerBtn.btnStyle
+            section#barginBtn Bargain
+        - } else {
+          a(href=`../namePurchase/${user._id}`)
+            section#buyBtn.offerBtn.btnStyle Bid on Name
+        - }

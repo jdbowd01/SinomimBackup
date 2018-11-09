@@ -1,7 +1,3 @@
-body {
-  display: flex;
-  flex-direction: column;
-}
 header {
   flex: 0 1 40px;
 }
@@ -15,9 +11,6 @@ h2 {
 .buyTab {
   margin: auto 0%;
 }
-.buyTab h1 {
-  margin-bottom: 5%;
-}
 .bidTab {
   margin: auto 0%;
 }
@@ -25,31 +18,20 @@ h2 {
   margin-bottom: 2%;
 }
 .offerBtn {
-  width: 16%;
+  width: 30%;
   padding: 10px;
-  margin: auto 0%;
-  margin-left: 10%;
   font-size: 30;
-}
-.offerBtn:first-child {
-  margin-left: 29%;
 }
 
 #detailPage {
   flex: 1 0 auto;
-  display: flex;
-  flex-direction: column;
 }
 #nameInfo {
   flex: 70;
-  display: flex;
-  flex-direction: row;
   margin-top: 1%; 
 }
 #nameDetails {
   flex: 1;
-  display: flex;
-  flex-direction: column;
   margin-left: 2%;
 }
 #nameBargains {
@@ -58,7 +40,9 @@ h2 {
   margin-right: 2%;
 }
 #nameOffers {
-  flex: 30;
-  display: flex;
-  flex-direction: row;
+  flex: 0 1 auto;
+  width: 40%;
+  margin: 0% auto;
+  margin-bottom: 2%;
+  justify-content: space-between;
 }

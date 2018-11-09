@@ -1,0 +1,11 @@
+h1 {
+  margin: 3% 0%; 
+}
+button {
+  margin: 10% 45%;
+}
+
+#info {
+  width: 40%;
+  justify-content: space-around;
+}

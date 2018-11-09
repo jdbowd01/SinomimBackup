@@ -14,23 +14,23 @@ html
         a.navtab.unselectedTab(href="../nameList"): li Market
         a.navtab.unselectedTab(href="../about"): li About
         a.navtab(href="../login"): li Profile 
-    #errorField
+    #errorField.flexCol
       - if(error != null) {
         - for(var i = 0; i < error.length; i++) {
           p.errorMsg= error[i].msg
         - }
       - }
-    form#loginArea(action='signup', method='Post')
-      .signUpRow
+    form#loginArea.flexCol(action='signup', method='Post')
+      .signUpRow.flexRow
         input#usernameFill.loginInput(type='text', placeholder='Username', name='user', autocomplete='off')
         input#emailFill.loginInput(type='text', placeholder='Email Address', name='email', autocomplete='off')
-      .signUpRow
+      .signUpRow.flexRow
         input#passwordFill.loginInput(type='password', placeholder='Password', name='pass')
         input#confirmFill.loginInput(type='password', placeholder='Confirm Password' name='confirm')
-      #loginSignup
+      #loginSignup.marginAuto
         input#logIn.btnStyle.importantText(type='submit', value='Register')
-        #noAccount
+        #noAccount.flexCol
           p Have an account already?
           a(href='/login')
-            section#signUp.btnStyle.importantText Log in here!
+            section#signUp.marginAuto.btnStyle.importantText Log in here!
     script(src='scripts/login.js')

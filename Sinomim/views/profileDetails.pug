@@ -4,7 +4,7 @@ html
     link(href='/css/css-reset.css', rel='stylesheet')
     link(href='/css/styles.css', rel='stylesheet')
     link(href='/css/profileStyle.css', rel='stylesheet')
-  body
+  body.flexCol
     header.flexRow
       section#logoHold
         a(href='/')
@@ -14,32 +14,94 @@ html
         a.navtab.unselectedTab(href="../nameList"): li Market
         a.navtab.unselectedTab(href="../about"): li About
         a.navtab(href="../login"): li Profile
-    #userHold
-      #userInfo
-        .userInfoRow
+    #userHold.flexRow
+      #userInfo.flexCol
+        .userInfoRow.flexCol
           h1.importantText Username
-          h2= profile.username
-        .userInfoRow
+          h2= profileData.username
+        .userInfoRow.flexCol
           h1.importantText Date Created
-          h2= profile.dateCreated.toUTCString()
-        .userInfoRow
+          h2= profileData.dateCreated.toUTCString()
+        .userInfoRow.flexCol
           .changeable.flexRow
             h1.importantText Email
-            section#emailChange.changeBtn.btnStyle.importantText Change
-          h2= profile.email
-        .userInfoRow        
-          section#passChange.changeBtn.btnStyle.importantText Change Password
-          section#deleteAccount.changeBtn.btnStyle.importantText Delete Account
-      #userTables
-        table#transactionTable
-          tr
-            td.importantText Name
-            td.importantText Platform
-            td.importantText Sold For
-          //- - for(var i = (names.length - 4 > 0) ? names.length - 4 : 0; i < names.length - 1; i++) {
-          //-   tr
-          //-     td=names[i]
-          //- - }
-        table#ownedTable
-    script(src='scripts/profile.js')
-      
+            - if(edit) {
+              section#emailChange.changeBtn.btnStyle.importantText Change
+            - }
+          h2= profileData.email
+        - if(edit) {
+          .userInfoRow        
+            section#passChange.userEdit.changeBtn.btnStyle.importantText Change Password
+          .userInfoRow        
+            section#addName.userEdit.changeBtn.btnStyle.importantText Add Profile
+        - }
+      #userTables.flexCol
+        #transactionTable.center-text
+          #transactionTitle.flexRow.marginAuto
+            h1 Transactions
+            section#seeAllOwned.changeBtn.btnStyle.importantText See All
+          table.center-text
+            tr.center-text
+              td.tableTitle.importantText.center-text Name
+              td.tableTitle.importantText.center-text Platform
+              td.tableTitle.importantText.center-text Sold For
+            //- - for(var i = (profileData.names.length - 4 > 0) ? profileData.names.length - 4 : 0; i < profileData.names.length - 1; i++) {
+            //-   tr
+            //-     td=profileData.names[i].nickname
+            //-     td=profileData.names[i].platform
+            //-     td=new Date(profileData.names[i].lastActivity).toUTCString()
+            //- - }
+        #ownedTable.center-text
+          #ownedTitle.flexRow.marginAuto
+            h1 Profiles Owned
+            section#seeAllOwned.changeBtn.btnStyle.importantText See All
+          table.center-text
+            tr.center-text
+              td.tableTitle.importantText.center-text Name
+              td.tableTitle.importantText.center-text Platform
+              td.tableTitle.importantText.center-text Last Activity
+              - for(var i = 0; i < 3; i++) {
+                - if (profileData.names.length > i) {
+                  tr.center-text
+                    td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].nickname
+                    td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].platform
+                    td.ownedData.center-text=new Date(profileData.names[profileData.names.length - (i + 1)].lastActivity).toUTCString()
+                - } else {
+                  tr.center-text
+                    td.ownedData.center-text
+                    td.ownedData.center-text
+                    td.ownedData.center-text
+                - }
+              - }
+    form#emailChangeForm(action='/emailChange', method='Post')
+      p.importantText Please enter your new email here
+      input.emailInput.marginAuto(type='text', placeholder='New Email Address', name='email', autocomplete='off')
+      input#emailChangeSubmit.btnStyle.importantText.marginAuto(type='submit', value='Change')
+    form#passChangeForm(action='/passChange', method='Post')
+      p.importantText Please enter your old password here
+      input.passInput.marginAuto(type='password', placeholder='Old Password', name='oldPass', autocomplete='off')
+      p.importantText Please enter your new password here
+      input.passInput.marginAuto(type='password', placeholder='New Password', name='newPass', autocomplete='off')
+      p.importantText Confirm new password
+      input.passInput.marginAuto(type='password', placeholder='Confirm Password', name='newPassConfirm', autocomplete='off')
+      input#passChangeSubmit.btnStyle.importantText.marginAuto(type='submit', value='Change')
+    //- WIP
+    form#addNameForm(action='/addName', method='Post')
+      p.importantText Please enter your new account ID here
+      input.addNameInput.marginAuto(type='text', placeholder='Account ID', name='accID', autocomplete='off')
+      input#addNameSubmit.btnStyle.importantText.marginAuto(type='submit', value='Add')
+    //- WIP
+    table#displayAllTransactions
+      - for(var i = 0; i < profileData.names.length; i++) {
+          tr.center-text
+            td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].nickname
+            td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].platform
+            td.ownedData.center-text=new Date(profileData.names[profileData.names.length - (i + 1)].lastActivity).toUTCString()
+      - }
+    table#displayAllNames
+    - if(edit) {
+      #dangerousOptions
+        section#logOut.dangerous.btnStyle.importantText Log Out
+        section#deleteAccount.dangerous.btnStyle.importantText Delete Account
+    - }
+    script(src='../scripts/profile.js')

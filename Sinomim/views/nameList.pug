@@ -6,7 +6,7 @@ html
     link(href='/css/marketStyle.css', rel='stylesheet')
     link(href='https://use.fontawesome.com/releases/v5.4.1/css/all.css', rel='stylesheet', 
     integrity='sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz', crossorigin='anonymous')
-  body
+  body.flexCol
     header.flexRow
       section#logoHold
         a(href='/')
@@ -16,9 +16,9 @@ html
         a.navtab(href="nameList"): li Market
         a.navtab.unselectedTab(href="about"): li About
         a.navtab.unselectedTab(href="../login"): li Profile 
-    #market
-      #platformChoice
-        #selectBtns
+    #market.flexCol
+      #platformChoice.flexRow
+        #selectBtns.flexCol
           section#selectAll.btnStyle.importantText Select All
           section#selectNone.btnStyle.importantText Select None
         #imageSelectHold
@@ -30,11 +30,11 @@ html
             img.imageSelect(src='/images/Logo3.png')
           .imageSelectHold
             img.imageSelect(src='/images/Logo4.png')
-        #selectArrows
+        #selectArrows.flexCol
           img#upArrow.arrowBtn(src='/images/arrow.png')
           img#downArrow.arrowBtn(src='/images/arrow.png')
       #nameMarket.flexRow
-        #nameFilter
+        #nameFilter.flexCol
           #nameSearch.flexRow.marginAuto
             p.importantText Search for:
             input(type=text, onKeyUp='changePage()')
@@ -81,7 +81,10 @@ html
           #namePaginationMove.flexRow
             input(type='number', value=1, min=1, max=1, onChange='changePage()')
             p of 1
-        #nameDetail
+        #nameDetail.flexCol
+          h2.importantText.center-text.welcomeText Welcome to the marketplace!
+          p.center-text.welcomeText The blue buttons you see in the center are the names, hover over any one for more details!
+          p.center-text.welcomeText Above those is the platform selection. If you are looking for a name from a certain place, select it there!
 
     script.
       var users = #{users.length};

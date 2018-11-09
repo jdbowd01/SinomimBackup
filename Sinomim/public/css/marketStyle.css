@@ -2,10 +2,6 @@ html, body {
   height: 100%;
   margin: 0;
 }
-body {
-  display: flex;
-  flex-direction: column;
-}
 header {
   flex: 0 1 40px;
 }
@@ -53,26 +49,23 @@ h3 {
 .notOnPage { 
   display: none;
 }
+.welcomeText {
+  margin: 0% 5%;
+}
 
 #market {
   flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
   height: 100%;
   margin: 0;
 }
 #platformChoice {
   flex: 0 1 80px;
-  display: flex;
-  flex-direction: row;
   height: 80px;
   border-bottom: .5px solid #000;
   margin-top: 2.5px;
 }
 #selectBtns {
   flex: 2;
-  display: flex;
-  flex-direction: column;
 }
 #selectAll, #selectNone {
   width: 50%;
@@ -86,8 +79,6 @@ h3 {
 }
 #selectArrows {
   flex: 1;
-  display: flex;
-  flex-direction: column;
 }
 #downArrow {
   transform: rotate(180deg);
@@ -97,8 +88,6 @@ h3 {
 }
 #nameFilter {
   flex: 1;
-  display: flex;
-  flex-direction: column;
   border: 1px solid #000;
   margin: 3%;
   justify-content: space-around;
@@ -119,8 +108,6 @@ h3 {
 }
 #nameDetail {
   flex: 1;
-  display: flex;
-  flex-direction: column;
   justify-content: space-around;
   border: 1px solid #000;
   margin: 3%;

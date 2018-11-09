@@ -1,7 +1,3 @@
-body {
-  display: flex;
-  flex-direction: column;
-}
 input::placeholder {
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   font: bolder;
@@ -17,8 +13,6 @@ header {
   border-radius: 10px;
 }
 .signUpRow {
-  display: flex;
-  flex-direction: row;
   width: 50%;
   margin: 0% auto;
 }
@@ -30,19 +24,14 @@ header {
 
 #errorField {
   flex: 0 1 30%;
-  display: flex;
-  flex-direction: column;
 }
 #loginArea {
   flex: 1 1 auto;
-  display: flex;
-  flex-direction: column;
 }
 #loginSignUp {
   display: flex;
   flex-direction: row;
   width: 30%;
-  margin: 0% auto;
   margin-top: 3%;
 }
 #logIn {
@@ -52,12 +41,9 @@ header {
   margin-right: auto;
 }
 #noAccount {
-  display: flex;
-  flex-direction: column;
   justify-content: space-between;
 }
 #signUp {
   width: fit-content;
   padding: 4px;
-  margin: 0% auto;
 }
