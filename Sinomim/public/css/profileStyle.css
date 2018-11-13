@@ -5,11 +5,6 @@ table {
   width: 100%;
   border-collapse: collapse;
 }
-table, th, td {
-  font-size: 20px;
-  padding: 5px;
-  border: 1px solid black;
-}
 input::placeholder {
   font-family: Copperplate,Copperplate Gothic Light,fantasy;
   font: bolder;
@@ -72,6 +67,9 @@ input::placeholder {
   z-index: 2;
   text-align: center;
   justify-content: space-evenly;
+}
+#auctionPart {
+  display: none;
 }
 #emailChangeSubmit, #passChangeSubmit {
   width: fit-content;

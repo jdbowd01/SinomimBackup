@@ -47,14 +47,42 @@ html
         #nameBargains
           h1.importantText Bargains Denied
           table
-            //- Here's where that bargains stuff comes in
-      #nameOffers.flexRow
-        - if(user.buy) {
-          a(href=`../namePurchase/${user._id}`).offerBtn.btnStyle
-            section#buyBtn Buy Name
-          a(href=`../namePurchase/${user._id}`).offerBtn.btnStyle
-            section#barginBtn Bargain
-        - } else {
-          a(href=`../namePurchase/${user._id}`)
-            section#buyBtn.offerBtn.btnStyle Bid on Name
-        - }
+            tr.center-text
+              td.tableTitle.bargainCell.center-text Offer
+              td.tableTitle.bargainCell.center-text Date Offered
+          - for(var i = 0; i < 5; i++) {
+            - if(user.bargains.length > i) {
+              - if(user.bargains[i].status == false) {
+                tr.bargainRow.center-text
+                  td.bargainCell.center-text=user.bargains[i].offer
+                  td.bargainCell.center-text=user.bargains[i].date.toUTCString()
+              - } else {
+                tr.bargainRow.center-text
+                  td.bargainCell.center-text
+                  td.bargainCell.center-text
+              - }
+            - } else {
+              tr.center-text
+                td.bargainCell.center-text
+                td.bargainCell.center-text
+            - }
+          - }
+      - if(ownedName) {
+        h2.center-text You own this name.
+      - } else if(loggedIn) {
+        #nameOffers.flexRow.marginAuto
+          - if(user.buy) {
+            a(href=`../namePurchase/${user._id}`).offerBtn.btnStyle
+              section#buyBtn Buy Name
+            a(href=`../nameBargain/${user._id}`).offerBtn.btnStyle
+              section#barginBtn Bargain
+          - } else {
+            a(href=`../namePurchase/${user._id}`)
+              section#buyBtn.offerBtn.btnStyle Bid on Name
+          - }
+      - } else {
+        #nameOffersLogin.flexRow
+          p#loginTxt Want to obtain this name? 
+          a(href=`../login?profile=${user._id}`)
+            section#login.btnStyle.importantText Login In Here
+      - }

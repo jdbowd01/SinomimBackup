@@ -73,11 +73,34 @@ html
                     td.ownedData.center-text
                 - }
               - }
-    form#emailChangeForm(action='/emailChange', method='Post')
+    form#emailChangeForm(action='../emailChange', method='Post')
       p.importantText Please enter your new email here
       input.emailInput.marginAuto(type='text', placeholder='New Email Address', name='email', autocomplete='off')
       input#emailChangeSubmit.btnStyle.importantText.marginAuto(type='submit', value='Change')
-    form#passChangeForm(action='/passChange', method='Post')
+    form#addNameForm.flexCol(action='../newName', method='Post')
+      .flexCol
+        h2.importantText.center-text Choose your platform
+        .flexRow.marginAuto
+          input(type='radio', name='platform', value='steam' checked)
+          p Steam
+      .flexCol
+        h2.importantText.center-text Enter your platform ID
+        input(type='text', name='platformID', placeholder='Platform ID of new account' autocomplete='off')
+      .flexCol
+        h2.importantText.center-text Sell for set price or auction for any amount?
+        .flexRow.marginAuto
+          .flexRow
+            input#sellRadio(type='radio', name='buyBid', value='sell' checked)
+            p Sell
+          .flexRow
+            input#auctionRadio(type='radio', name='buyBid', value='auction')
+            p Auction
+      #sellPart
+        .flexCol
+          h2.importantText.center-text Price your name
+          input(type='number', name='price', min=0)
+      #auctionPart
+    form#passChangeForm(action='../passChange', method='Post')
       p.importantText Please enter your old password here
       input.passInput.marginAuto(type='password', placeholder='Old Password', name='oldPass', autocomplete='off')
       p.importantText Please enter your new password here
@@ -85,12 +108,6 @@ html
       p.importantText Confirm new password
       input.passInput.marginAuto(type='password', placeholder='Confirm Password', name='newPassConfirm', autocomplete='off')
       input#passChangeSubmit.btnStyle.importantText.marginAuto(type='submit', value='Change')
-    //- WIP
-    form#addNameForm(action='/addName', method='Post')
-      p.importantText Please enter your new account ID here
-      input.addNameInput.marginAuto(type='text', placeholder='Account ID', name='accID', autocomplete='off')
-      input#addNameSubmit.btnStyle.importantText.marginAuto(type='submit', value='Add')
-    //- WIP
     table#displayAllTransactions
       - for(var i = 0; i < profileData.names.length; i++) {
           tr.center-text
@@ -101,7 +118,8 @@ html
     table#displayAllNames
     - if(edit) {
       #dangerousOptions
-        section#logOut.dangerous.btnStyle.importantText Log Out
+        a(href='../logout')
+          section#logOut.dangerous.btnStyle.importantText Log Out
         section#deleteAccount.dangerous.btnStyle.importantText Delete Account
     - }
     script(src='../scripts/profile.js')

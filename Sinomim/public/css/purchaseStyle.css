@@ -4,8 +4,25 @@ h1 {
 button {
   margin: 10% 45%;
 }
+input::placeholder {
+  font-family: Copperplate,Copperplate Gothic Light,fantasy;
+  font: bolder;
+  text-align: center;
+}
 
 #info {
   width: 40%;
   justify-content: space-around;
+}
+#yourOffer {
+  margin-top: 10%;
+  margin-bottom: 1%;
+}
+#bargainInput {
+  display: flex;
+  width: 40%;
+  justify-content: space-between;
+}
+#bargainOffer {
+  width: 75%;
 }

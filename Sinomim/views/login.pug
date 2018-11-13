@@ -20,7 +20,7 @@ html
           p.errorMsg= error[i].msg
         - }
       - }
-    form#loginArea.flexCol(action='login', method='Post')
+    form#loginArea.flexCol(action=`/login${end}`, method='Post')
       input#usernameFill.loginInput(type='text', placeholder='Username or Email Address', name='user', autocomplete='off')
       input#passwordFill.loginInput(type='password', placeholder='Password', name='pass')
       #loginSignup.marginAuto

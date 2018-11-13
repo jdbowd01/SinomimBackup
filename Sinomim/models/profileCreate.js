@@ -32,7 +32,7 @@ var ProfileCreate = mongoose.model('ProfileCreate', ProfileCreateModel);
 
 
 const TokenCreateModel = new Schema({
-  userId: { type: ObjectId, ref: 'SteamUserData' },
+  userID: { type: ObjectId, ref: 'SteamUserData' },
   token: String,
   createdAt: { type: Date, default: Date.now, expires: 43200 }
 });
