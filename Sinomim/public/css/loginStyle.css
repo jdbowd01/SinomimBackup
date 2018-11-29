@@ -9,7 +9,7 @@ header {
 
 .errorMsg {
   padding: 3px;
-  border: 2px solid #f00;
+  background-color: #f66;
   border-radius: 10px;
 }
 .signUpRow {
@@ -28,17 +28,22 @@ header {
 #loginArea {
   flex: 1 1 auto;
 }
-#loginSignUp {
+#loginSignup {
   display: flex;
   flex-direction: row;
-  width: 30%;
+  width: 35%;
   margin-top: 3%;
+}
+#capsWarn {
+  display: none;
+  width: fit-content;
+  margin: 0% auto;
 }
 #logIn {
   width: fit-content;
-  font-size: 25;
   padding: 14px;
   margin-right: auto;
+  border: 0;
 }
 #noAccount {
   justify-content: space-between;

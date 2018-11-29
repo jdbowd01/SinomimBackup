@@ -1,125 +1,153 @@
-html
-  head
-    title Sinomim Log In
-    link(href='/css/css-reset.css', rel='stylesheet')
-    link(href='/css/styles.css', rel='stylesheet')
-    link(href='/css/profileStyle.css', rel='stylesheet')
-  body.flexCol
-    header.flexRow
-      section#logoHold
-        a(href='/')
-          img#logo(src='/images/Logo1.png')
-      ul#navbar
-        a.navtab.unselectedTab(href="../"): li Home
-        a.navtab.unselectedTab(href="../nameList"): li Market
-        a.navtab.unselectedTab(href="../about"): li About
-        a.navtab(href="../login"): li Profile
-    #userHold.flexRow
-      #userInfo.flexCol
-        .userInfoRow.flexCol
-          h1.importantText Username
-          h2= profileData.username
-        .userInfoRow.flexCol
-          h1.importantText Date Created
-          h2= profileData.dateCreated.toUTCString()
-        .userInfoRow.flexCol
-          .changeable.flexRow
-            h1.importantText Email
-            - if(edit) {
-              section#emailChange.changeBtn.btnStyle.importantText Change
-            - }
-          h2= profileData.email
-        - if(edit) {
-          .userInfoRow        
-            section#passChange.userEdit.changeBtn.btnStyle.importantText Change Password
-          .userInfoRow        
-            section#addName.userEdit.changeBtn.btnStyle.importantText Add Profile
-        - }
-      #userTables.flexCol
-        #transactionTable.center-text
-          #transactionTitle.flexRow.marginAuto
-            h1 Transactions
-            section#seeAllOwned.changeBtn.btnStyle.importantText See All
+extends layout
+
+block moreCss
+  link(href='/css/profileStyle.css', rel='stylesheet')
+
+block nav
+  ul#navbar
+    a.navtab.unselectedTab(href="/"): li Home
+    a.navtab.unselectedTab(href="/nameList"): li Market
+    a.navtab.unselectedTab(href="/bargains"): li Bargains
+    - if(headBlue) {
+      a.headerTab.navtab(href="/login"): li Profile
+    - } else {
+      a.navtab(href="/login"): li Profile
+    - }
+
+block content
+  - if(headBlue) {
+    #notificationBox.flexRow
+      p.textWithBtn.importantText You have an offer for one of your names.
+      a.changeBtn.btnStyle(href=`../bargains/${profileData._id}`) Click here to see them!
+  - } else {
+    - if(edit) {
+      #notificationBox.flexRow
+        p#noOffers.importantText.center-text You have no offers for any of your names.
+    - } else {
+      #notificationBox.flexRow
+        p.textWithBtn.importantText This is not your account.
+        a.changeBtn.btnStyle(href=`../login`) Click here to see yours!
+    - }
+  - }
+  #userHold.flexRow
+    #userInfo.flexCol
+      .userInfoRow.flexCol
+        h1.importantText Username
+        h2= profileData.username
+      .userInfoRow.flexCol
+        h1.importantText Date Created
+        h2= profileData.dateCreated.toUTCString()
+      .userInfoRow.flexCol
+        .changeable.flexRow
+          h1.importantText Email
+          - if(edit) {
+            section#emailChange.changeBtn.btnStyle Change
+          - }
+        h2= profileData.email
+      - if(edit) {
+        .userInfoRow        
+          section#passChange.userEdit.changeBtn.btnStyle Change Password
+        .userInfoRow        
+          section#addName.userEdit.changeBtn.btnStyle Add Profile
+      - }
+    #userTables.flexCol
+      #transactionTable.center-text
+        #transactionTitle.flexRow.marginAuto
+          h1.importantText Transactions
+          section#seeAllOwned.changeBtn.btnStyle See All
+        - if(profileData.transactions.length == 0) {
+          h4 User has done no transactions.
+        - } else {
           table.center-text
             tr.center-text
               td.tableTitle.importantText.center-text Name
               td.tableTitle.importantText.center-text Platform
-              td.tableTitle.importantText.center-text Sold For
-            //- - for(var i = (profileData.names.length - 4 > 0) ? profileData.names.length - 4 : 0; i < profileData.names.length - 1; i++) {
-            //-   tr
-            //-     td=profileData.names[i].nickname
-            //-     td=profileData.names[i].platform
-            //-     td=new Date(profileData.names[i].lastActivity).toUTCString()
-            //- - }
-        #ownedTable.center-text
-          #ownedTitle.flexRow.marginAuto
-            h1 Profiles Owned
-            section#seeAllOwned.changeBtn.btnStyle.importantText See All
+              td.tableTitle.importantText.center-text Bought or Sold?
+              td.tableTitle.importantText.center-text Price
+            - for(var j = 0; j < 3; j++) {
+              - if(profileData.transactions.length > j) {
+                tr.center-text
+                  td.ownedData.center-text=profileData.transactions[j].name
+                  td.ownedData.center-text=profileData.transactions[j].platform
+                  td.ownedData.center-text=((profileData.transactions[j].sell) ? 'Sold' : 'Bought')
+                  td.ownedData.center-text=profileData.transactions[j].price
+              - }
+            - }
+        - }
+      #ownedTable.center-text
+        #ownedTitle.flexRow.marginAuto
+          h1.importantText Profiles Owned
+          section#seeAllOwned.changeBtn.btnStyle See All
+        - if(profileData.names.length == 0) {
+          h4 User has no profiles are owned.
+        - } else {
           table.center-text
             tr.center-text
               td.tableTitle.importantText.center-text Name
               td.tableTitle.importantText.center-text Platform
               td.tableTitle.importantText.center-text Last Activity
-              - for(var i = 0; i < 3; i++) {
-                - if (profileData.names.length > i) {
-                  tr.center-text
-                    td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].nickname
-                    td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].platform
-                    td.ownedData.center-text=new Date(profileData.names[profileData.names.length - (i + 1)].lastActivity).toUTCString()
-                - } else {
-                  tr.center-text
-                    td.ownedData.center-text
-                    td.ownedData.center-text
-                    td.ownedData.center-text
-                - }
+            - for(var i = 0; i < 3; i++) {
+              - if (profileData.names.length > i) {
+                tr.center-text
+                  td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].nickname
+                  td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].platform
+                  td.ownedData.center-text=new Date(profileData.names[profileData.names.length - (i + 1)].lastActivity).toUTCString()
               - }
-    form#emailChangeForm(action='../emailChange', method='Post')
-      p.importantText Please enter your new email here
-      input.emailInput.marginAuto(type='text', placeholder='New Email Address', name='email', autocomplete='off')
-      input#emailChangeSubmit.btnStyle.importantText.marginAuto(type='submit', value='Change')
-    form#addNameForm.flexCol(action='../newName', method='Post')
+            - }
+        - }
+  form#emailChangeForm(action=`../emailChange/${profileData._id}`, method='Post')
+    p.importantText Please enter your new email here
+    input.emailInput.marginAuto(type='text', placeholder='New Email Address', name='email', autocomplete='off')
+    section#emailChangeSubmit.btnStyle.marginAuto Change
+  form#addNameForm.flexCol(action=`../newName/${profileData._id}`, method='Post')
+    .flexCol
+      h2.importantText.center-text Choose Platform
+      .flexRow.marginAuto
+        input.addNameInput(type='radio', name='platform', value='steam' checked)
+        p Steam
+    .flexCol
+      h2.importantText.center-text Enter Platform ID
+      input.addNameInput.marginAuto(type='text', name='platformID', placeholder='Platform ID' autocomplete='off')
+    .flexCol
+      h2.importantText.center-text Sell for set price or auction for any amount?
+      .flexRow.marginAuto
+        .flexRow
+          input#sellRadio.addNameInput(type='radio', name='buyBid', value='sell', onChange='changeAddForm()', checked)
+          p Sell
+        .flexRow
+          input#auctionRadio.addNameInput(type='radio', name='buyBid', value='auction', onChange='changeAddForm()')
+          p Auction
+    #sellPart.flexCol
+      h2.importantText.center-text Price
+      input.addNameInput.marginAuto(type='number', name='price', value='0.00', step='0.01', min='0.00')
+    #auctionPart.flexRow
       .flexCol
-        h2.importantText.center-text Choose your platform
-        .flexRow.marginAuto
-          input(type='radio', name='platform', value='steam' checked)
-          p Steam
+        h2.importantText.center-text Bid Start Price
+        input.addNameInput.marginAuto(type='number', name='price', value='0.00', step='0.01', min='0.00')
       .flexCol
-        h2.importantText.center-text Enter your platform ID
-        input(type='text', name='platformID', placeholder='Platform ID of new account' autocomplete='off')
-      .flexCol
-        h2.importantText.center-text Sell for set price or auction for any amount?
-        .flexRow.marginAuto
-          .flexRow
-            input#sellRadio(type='radio', name='buyBid', value='sell' checked)
-            p Sell
-          .flexRow
-            input#auctionRadio(type='radio', name='buyBid', value='auction')
-            p Auction
-      #sellPart
-        .flexCol
-          h2.importantText.center-text Price your name
-          input(type='number', name='price', min=0)
-      #auctionPart
-    form#passChangeForm(action='../passChange', method='Post')
-      p.importantText Please enter your old password here
-      input.passInput.marginAuto(type='password', placeholder='Old Password', name='oldPass', autocomplete='off')
-      p.importantText Please enter your new password here
-      input.passInput.marginAuto(type='password', placeholder='New Password', name='newPass', autocomplete='off')
-      p.importantText Confirm new password
-      input.passInput.marginAuto(type='password', placeholder='Confirm Password', name='newPassConfirm', autocomplete='off')
-      input#passChangeSubmit.btnStyle.importantText.marginAuto(type='submit', value='Change')
-    table#displayAllTransactions
-      - for(var i = 0; i < profileData.names.length; i++) {
-          tr.center-text
-            td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].nickname
-            td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].platform
-            td.ownedData.center-text=new Date(profileData.names[profileData.names.length - (i + 1)].lastActivity).toUTCString()
-      - }
-    table#displayAllNames
-    - if(edit) {
-      #dangerousOptions
-        a(href='../logout')
-          section#logOut.dangerous.btnStyle.importantText Log Out
-        section#deleteAccount.dangerous.btnStyle.importantText Delete Account
+        h2.importantText.center-text Minimum Raise
+        input.addNameInput.marginAuto(type='number', name='raise', value='0.01', step='0.01', min='0.01')
+    section#addNameSubmit.btnStyle.importantText.marginAuto Add Profile
+  form#passChangeForm(action='../passChange', method='Post')
+    p.importantText Please enter your old password here
+    input.passInput.marginAuto(type='password', placeholder='Old Password', name='oldPass', autocomplete='off')
+    p.importantText Please enter your new password here
+    input.passInput.marginAuto(type='password', placeholder='New Password', name='newPass', autocomplete='off')
+    p.importantText Confirm new password
+    input.passInput.marginAuto(type='password', placeholder='Confirm Password', name='newPassConfirm', autocomplete='off')
+    input#passChangeSubmit.btnStyle.importantText.marginAuto(type='submit', value='Change')
+  table#displayAllTransactions
+    - for(var i = 0; i < profileData.names.length; i++) {
+        tr.center-text
+          td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].nickname
+          td.ownedData.center-text=profileData.names[profileData.names.length - (i + 1)].platform
+          td.ownedData.center-text=new Date(profileData.names[profileData.names.length - (i + 1)].lastActivity).toUTCString()
     - }
-    script(src='../scripts/profile.js')
+  table#displayAllNames
+  - if(edit) {
+    #dangerousOptions
+      a#logOut.dangerous.btnStyle(href='../logout') Log Out
+      section#deleteAccount.dangerous.btnStyle Delete Account
+  - }
+  #errorField
+  script(src='../scripts/profile.js')

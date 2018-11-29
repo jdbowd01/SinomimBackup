@@ -1,13 +1,40 @@
+body {
+  display: flex;
+  flex-direction: column;
+}
+header {
+  flex: 0 1 40px;
+}
+
+#allContent {
+  flex: 1 1 auto;
+  text-align: center;
+}
+#supported {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 36px;
+  background-color: #00e8ab;
+}
+#supported p {
+  height: fit-content;
+  opacity: 0;
+}
 #homeTitle {
   margin: 6% 0% 1% 0%;
   font-size: 90px;
+  user-select: none;
 }
 #homeDesc {
   font-size: 20px;
+  user-select: none;
 }
 #exploreBtn {
-  width: 150px;
+  display: inline-block;
+  width: fit-content;
   font-size: 22px;
   padding: 1%;
-  margin: 17% auto 0% auto;
+  opacity: 0;
+  margin: 0% auto;
 }

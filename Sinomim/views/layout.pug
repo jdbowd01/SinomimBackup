@@ -1,0 +1,14 @@
+doctype html
+html
+  head
+    title #{title}
+    link(href='/css/css-reset.css', rel='stylesheet')
+    link(href='/css/styles.css', rel='stylesheet')
+    block moreCss
+  body.flexCol
+    header.flexRow
+      section#logoHold
+        a(href='/')
+          img#logo(src='/images/Logo1.png')
+      block nav
+    block content

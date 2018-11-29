@@ -2,6 +2,7 @@ header {
   flex: 0 1 40px;
 }
 table {
+  height: auto;
   width: 100%;
   border-collapse: collapse;
 }
@@ -12,7 +13,7 @@ input::placeholder {
 }
 
 .btnStyle {
-  border: 1px solid #000;
+  padding: 1%;
 }
 .changeBtn {
   height: fit-content;
@@ -20,14 +21,15 @@ input::placeholder {
   padding: 4px 7px;
   margin: auto 1%;
 }
+.textWithBtn {
+  height: fit-content;
+  margin: auto 0% auto auto;
+}
 .tableTitle {
   font-weight: bold;
 }
 .userInfoRow, .userEdit {
   justify-content: center;
-}
-.ownedData {
-  height: 31px;
 }
 .emailInput, .passInput {
   width: 70%;
@@ -70,10 +72,40 @@ input::placeholder {
 }
 #auctionPart {
   display: none;
+  justify-content: space-around;
 }
-#emailChangeSubmit, #passChangeSubmit {
+#addNameSubmit, #emailChangeSubmit, #passChangeSubmit {
   width: fit-content;
+}
+#addNameSubmit {
+  padding: 3px 5px;
+}
+#notificationBox {
+  flex: 0 1 36px;
+  text-align: center;
+}
+#notificationBox a {
+  height: fit-content;
+  margin-right: auto;
+}
+#noOffers {
+  margin: auto;
 }
 #dangerousOptions {
   flex: 0 1 fit-content;
+}
+#errorField {
+  display: none;
+  position: absolute;
+  top: 5%;
+  left: 0;
+  right: 0;
+  width: fit-content;
+  margin: 0% auto;
+  padding: 3px;
+  background-color: #f66;
+  border-radius: 10px;
+}
+#logOut {
+  display: flex;
 }

@@ -1,0 +1,63 @@
+body {
+  display: flex;
+  flex-direction: column;
+  height: auto;
+}
+header {
+  flex: 0 1 40px;
+}
+
+.bargainBox {
+  width: 90%;
+  padding: 1%;
+  background-color: #00e8ab;
+  margin: 2% auto;
+  box-shadow: 2px 3px 1px 1px #aaa;
+  justify-content: space-around;
+}
+.bargainBox h4 {
+  width: 25%;
+  overflow-wrap: break-word; 
+  margin: auto 0%;
+}
+.approveDeny {
+  width: fit-content;
+  margin-left: auto;
+  justify-content: space-around;
+}
+
+#emptyBack {
+  flex: 1 1 auto;
+}
+#login {
+  width: fit-content;
+  opacity: 0;
+  padding: 1%;
+  margin: 15% auto 0% auto;
+}
+#loginPrompt {
+  display: flex;
+  height: 36px;
+  background-color: #00e8ab;
+  justify-content: center;
+  align-items: center;
+}
+#loginPromptText {
+  opacity: 0;
+}
+#notificationBox {
+  height: 80px;
+}
+#bargainsSubmit, #bargainsSubmitBottom {
+  width: fit-content;
+  padding: 3px 7px;
+  margin: auto;
+}
+#bargainsSubmitBottom {
+  margin-bottom: 1%;
+}
+#errorText {
+  display: none;
+  width: fit-content;
+  margin-bottom: 1%; 
+}

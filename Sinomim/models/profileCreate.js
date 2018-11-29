@@ -24,9 +24,15 @@ const ProfileCreateModel = new Schema({
   dateCreated: Date,
   username: String,
   email: String,
-  isVerified: Boolean,
   password: String,
-  names: [{ type: String, ref: 'SteamUserData' }]
+  names: [{ type: String, ref: 'SteamUserData' }],
+  transactions: [{
+    sell: Boolean,
+    name: String,
+    platform: String,
+    price: String,
+    tradedAt: { type: Date, default: Date.now }
+  }]
 });
 var ProfileCreate = mongoose.model('ProfileCreate', ProfileCreateModel);
 

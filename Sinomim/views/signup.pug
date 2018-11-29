@@ -1,36 +1,34 @@
-html
-  head
-    title Sinomim Log In
-    link(href='/css/css-reset.css', rel='stylesheet')
-    link(href='/css/styles.css', rel='stylesheet')
-    link(href='/css/loginStyle.css', rel='stylesheet')
-  body.flexCol
-    header.flexRow
-      section#logoHold
-        a(href='/')
-          img#logo(src='/images/Logo1.png')
-      ul#navbar
-        a.navtab.unselectedTab(href="../"): li Home
-        a.navtab.unselectedTab(href="../nameList"): li Market
-        a.navtab.unselectedTab(href="../about"): li About
-        a.navtab(href="../login"): li Profile 
-    #errorField.flexCol
-      - if(error != null) {
-        - for(var i = 0; i < error.length; i++) {
-          p.errorMsg= error[i].msg
-        - }
+extends layout
+
+block moreCss
+  link(href='/css/loginStyle.css', rel='stylesheet')
+
+block nav
+  ul#navbar
+    a.navtab.unselectedTab(href="/"): li Home
+    a.navtab.unselectedTab(href="/nameList"): li Market
+    a.navtab.unselectedTab(href="/bargains"): li Bargains
+    a.navtab(href="/login"): li Profile 
+
+block content
+  #errorField.flexCol
+    - if(error != null) {
+      - for(var i = 0; i < error.length; i++) {
+        p.errorMsg= error[i].msg
       - }
-    form#loginArea.flexCol(action='signup', method='Post')
-      .signUpRow.flexRow
-        input#usernameFill.loginInput(type='text', placeholder='Username', name='user', autocomplete='off')
-        input#emailFill.loginInput(type='text', placeholder='Email Address', name='email', autocomplete='off')
-      .signUpRow.flexRow
-        input#passwordFill.loginInput(type='password', placeholder='Password', name='pass')
-        input#confirmFill.loginInput(type='password', placeholder='Confirm Password' name='confirm')
-      #loginSignup.marginAuto
-        input#logIn.btnStyle.importantText(type='submit', value='Register')
-        #noAccount.flexCol
-          p Have an account already?
-          a(href='/login')
-            section#signUp.marginAuto.btnStyle.importantText Log in here!
-    script(src='scripts/login.js')
+    - }
+  form#loginArea.flexCol(action='signup', method='Post')
+    h4#capsWarn Caps Lock is on!
+    .signUpRow.flexRow
+      input#usernameFill.loginInput(type='text', placeholder='Username', name='user', autocomplete='off')
+      input#emailFill.loginInput(type='text', placeholder='Email Address', name='email', autocomplete='off')
+    .signUpRow.flexRow
+      input#passwordFill.loginInput(type='password', placeholder='Password', name='pass')
+      input#confirmFill.loginInput(type='password', placeholder='Confirm Password' name='confirm')
+    #loginSignup.marginAuto
+      sectiont#logIn.btnStyle Register
+      #noAccount.flexCol
+        p Have an account already?
+        a(href='/login')
+          section#signUp.marginAuto.btnStyle Log in here!
+  script(src='scripts/login.js')

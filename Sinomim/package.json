@@ -9,6 +9,7 @@
   "author": "JBowden",
   "license": "ISC",
   "dependencies": {
+    "animejs": "^2.2.0",
     "bcrypt": "^3.0.2",
     "body-parser": "^1.18.3",
     "crypto": "^1.0.1",

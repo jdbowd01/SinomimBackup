@@ -1,0 +1,55 @@
+extends layout
+
+block moreCss
+  link(href='/css/bargainStyle.css', rel='stylesheet')
+
+block nav
+  ul#navbar
+    a.navtab.unselectedTab(href="/"): li Home
+    a.navtab.unselectedTab(href="/nameList"): li Market
+    a.navtab.headerTab(href="/bargains"): li Bargains
+    a.navtab.unselectedTab(href="/login"): li Profile 
+
+block content
+  - if(names == null) {
+    #emptyBack
+      section#loginPrompt
+        p#loginPromptText Please log in to see your bargains.
+      a(href=`/login?bargains=1`)
+        section#login.marginAuto.btnStyle Log in
+  - } else if(names.length == 0) {
+    #emptyBack
+      h1 There are no bargains on your names!
+  - } else {
+    - var total = 0; 
+    - for(var i = 0; i < names.length; i++) {
+      - total += names[i].bargains.length;
+    - }
+    form#bargainAccept.flexCol(action=`/bargainConfirm/${userID}`, method='post')
+      #notificationBox.flexCol
+        section#bargainsSubmit.btnStyle.importantText Confirm Bargains
+        p#errorText.marginAuto The red boxes show that the same name cannot be approved twice. Please revise.
+      - for(var i = 0; i < names.length; i++) {
+        - for(var j = 0; j < names[i].bargains.length; j++) {
+          .bargainBox.flexRow
+            h4 Name: #{names[i].nickname}
+            h4 Platform: #{names[i].platform}
+            h4 Offer: #{names[i].bargains[j].offer}
+            - if(edit) {
+              .approveDeny.flexCol
+                .flexRow
+                  input(type='radio', name=`bargain${i}status${j}`, value='a') 
+                  p Accept
+                .flexRow
+                  input(type='radio', name=`bargain${i}status${j}`, value='d') 
+                  p Deny
+                .flexRow
+                  input(type='radio', name=`bargain${i}status${j}`, value='u', checked) 
+                  p Undecided
+            - }
+        - }
+      - }
+      section#bargainsSubmitBottom.btnStyle.importantText Confirm Bargains
+  - }
+  script(src='../scripts/anime.min.js')
+  script(src='../scripts/bargain.js')

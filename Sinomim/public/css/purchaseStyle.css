@@ -10,6 +10,10 @@ input::placeholder {
   text-align: center;
 }
 
+.btnStyle {
+  border: 0;
+}
+
 #info {
   width: 40%;
   justify-content: space-around;

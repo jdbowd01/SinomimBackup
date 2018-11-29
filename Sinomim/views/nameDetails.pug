@@ -1,88 +1,90 @@
-html
-  head
-    title #{user.nickname}'s Detail
-    link(href='/css/css-reset.css', rel='stylesheet')
-    link(href='/css/styles.css', rel='stylesheet')
-    link(href='/css/detailStyle.css', rel='stylesheet')
-  body.flexCol
-    header.flexRow
-      section#logoHold
-        a(href='/')
-          img#logo(src='/images/Logo1.png')
-      ul#navbar
-        a.navtab.unselectedTab(href="/"): li Home
-        a.navtab(href="../nameList"): li Market
-        a.navtab.unselectedTab(href="../about"): li About
-        a.navtab.unselectedTab(href="../login"): li Profile 
-    #detailPage.flexCol
-      #nameInfo.flexRow
-        #nameDetails.flexCol
-          - if(user.buy) {
-          .buyTab
-            h1.importantText Name
-            h2= user.nickname
-          .buyTab
-            h1.importantText Owner
-            h2= user.owner.username
-          .buyTab
-            h1.importantText Platform
-            h2= user.platform
-          .buyTab
-            h1.importantText Price
-            h2= user.price.toFixed(2)
-          - } else {
-          .bidTab
-            h1.importantText Name
-            h2= user.nickname
-          .bidTab
-            h1.importantText Owner
-            h2= user.owner.username
-          .bidTab
-            h1.importantText Platform
-            h2= user.platform
-          .bidTab
-            h1.importantText Buyout Price
-            h2= user.price.toFixed(2)
-          - }
-        #nameBargains
-          h1.importantText Bargains Denied
-          table
+extends layout
+
+block moreCss
+  link(href='/css/detailStyle.css', rel='stylesheet')
+
+block nav
+  ul#navbar
+    a.navtab.unselectedTab(href="/"): li Home
+    a.navtab(href="/nameList"): li Market
+    a.navtab.unselectedTab(href="/bargains"): li Bargains
+    a.navtab.unselectedTab(href="/login"): li Profile 
+
+block content
+  #detailPage.flexCol
+    #nameInfo.flexRow
+      #nameDetails.flexCol
+        - if(user.buy) {
+        .buyTab
+          h1.importantText Name
+          h2= user.nickname
+        .buyTab
+          h1.importantText Owner
+          h2= user.owner.username
+        .buyTab
+          h1.importantText Platform
+          h2= user.platform
+        .buyTab
+          h1.importantText Price
+          h2= '$'+user.price.toFixed(2)
+        - } else {
+        .bidTab
+          h1.importantText Name
+          h2= user.nickname
+        .bidTab
+          h1.importantText Owner
+          h2= user.owner.username
+        .bidTab
+          h1.importantText Platform
+          h2= user.platform
+        .bidTab
+          h1.importantText Buyout Price
+          h2= '$'+user.price.toFixed(2)
+        - }
+      #nameBargains
+        h1.importantText Bargains
+        - if(user.bargains.length < 1) {
+          p#noBargains There are no bargains on this name.
+        - } else {
+          table#bargainsTable
             tr.center-text
               td.tableTitle.bargainCell.center-text Offer
               td.tableTitle.bargainCell.center-text Date Offered
-          - for(var i = 0; i < 5; i++) {
-            - if(user.bargains.length > i) {
-              - if(user.bargains[i].status == false) {
+              td.tableTitle.bargainCell.center-text Status
+            - for(var i = 0; i < 5; i++) {
+              - if(user.bargains.length > i) {
                 tr.bargainRow.center-text
                   td.bargainCell.center-text=user.bargains[i].offer
                   td.bargainCell.center-text=user.bargains[i].date.toUTCString()
+                  - var status = 'Undecided';
+                  - if(user.bargains[i].status == false) {
+                    - status = 'Denied';
+                  - }
+                  td.bargainCell.center-text=status
               - } else {
-                tr.bargainRow.center-text
+                tr.center-text
+                  td.bargainCell.center-text
                   td.bargainCell.center-text
                   td.bargainCell.center-text
               - }
-            - } else {
-              tr.center-text
-                td.bargainCell.center-text
-                td.bargainCell.center-text
             - }
-          - }
-      - if(ownedName) {
-        h2.center-text You own this name.
-      - } else if(loggedIn) {
-        #nameOffers.flexRow.marginAuto
-          - if(user.buy) {
-            a(href=`../namePurchase/${user._id}`).offerBtn.btnStyle
-              section#buyBtn Buy Name
-            a(href=`../nameBargain/${user._id}`).offerBtn.btnStyle
-              section#barginBtn Bargain
-          - } else {
-            a(href=`../namePurchase/${user._id}`)
-              section#buyBtn.offerBtn.btnStyle Bid on Name
-          - }
-      - } else {
-        #nameOffersLogin.flexRow
-          p#loginTxt Want to obtain this name? 
-          a(href=`../login?profile=${user._id}`)
-            section#login.btnStyle.importantText Login In Here
-      - }
+        - }
+    - if(ownedName) {
+      h2.center-text You own this name.
+    - } else if(loggedIn) {
+      #nameOffers.flexRow.marginAuto
+        - if(user.buy) {
+          a(href=`../namePurchase/${user._id}`).offerBtn.btnStyle
+            section#buyBtn Buy Name
+          a(href=`../nameBargain/${user._id}`).offerBtn.btnStyle
+            section#barginBtn Bargain
+        - } else {
+          a#buyBtn(href=`../namePurchase/${user._id}`)
+            section.offerBtn.btnStyle Bid on Name
+        - }
+    - } else {
+      #nameOffersLogin.flexRow
+        p#loginTxt Want to obtain this name? 
+        a(href=`../login?nameDetails=${user._id}`)
+          section#login.btnStyle.importantText Login In Here
+    - }

@@ -5,42 +5,42 @@ const nameHolder = document.getElementById('nameSelect');
 const names = document.getElementsByClassName('usernameSale');
 const oldNameHolder = document.getElementById('nameSelect').innerHTML;
 
-// make the nameHolder a color that mathces the selected picture (like a tab), and make a box around the filtering options
+const allPlatforms = ['Steam'];
+var selectPlatforms = [];
+
 selectAll.addEventListener('click', function() {
   highlightborder('all');
 });
 selectNone.addEventListener('click', function() {
   highlightborder('none');
 });
-selectPics[0].addEventListener('click', function() {
-  highlightborder(0);
-});
-selectPics[1].addEventListener('click', function() {
-  highlightborder(1);
-});
-selectPics[2].addEventListener('click', function() {
-  highlightborder(2);
-});
-selectPics[3].addEventListener('click', function() {
-  highlightborder(3);
-});
+for(var i = 0; i < selectPics.length; i++) {
+  selectPics[i].addEventListener('click', function() {
+    highlightborder(i-1);
+  });
+}
 
 function highlightborder(borders) {
-  if(borders === 'all') {
+  if(borders == 'all') {
     for(var i = 0; i < selectPics.length; i++) {
-      selectPics[i].style.backgroundColor = 'rgb(129, 239, 135)';
+      selectPics[i].children[0].style.opacity = '1';
+      selectPlatforms.push(allPlatforms[i]);
     }
-  } else if(borders === 'none') {
+  } else if(borders == 'none') {
     for(var i = 0; i < selectPics.length; i++) {
-      selectPics[i].style.backgroundColor = 'rgba(255, 255, 255, 0)';
+      selectPics[i].children[0].style.opacity = '.5';
+      selectPlatforms = [];
     }
   } else {
-    if(selectPics[borders].style.backgroundColor == 'rgb(129, 239, 135)') {
-      selectPics[borders].style.backgroundColor = 'rgba(255, 255, 255, 0)';
+    if(selectPics[borders].children[0].style.opacity == '1') {
+      selectPics[borders].children[0].style.opacity = '.5';
+      selectPlatforms = selectPlatforms.filter(platform => platform != allPlatforms[borders]);
     } else {
-      selectPics[borders].style.backgroundColor = 'rgb(129, 239, 135)';
+      selectPics[borders].children[0].style.opacity = '1';
+      selectPlatforms.push(allPlatforms[borders]);
     }
   }
+  changePage();
 }
 
 function sortPage(nameOptions) {
@@ -81,14 +81,16 @@ function givePageResults() {
     if(nameDisplays.length > 0) {
       if(bidbuy[1].children[0].checked) { bb = false }
       if(bidbuy[2].children[0].checked) { bb = true }
-      if(JSON.parse(nameDisplays[i].dataset.json).nickname.includes(searchText) && 
+      if(JSON.parse(nameDisplays[i].dataset.json).nickname.toLowerCase().includes(searchText.toLowerCase()) && 
+      selectPlatforms.includes(JSON.parse(nameDisplays[i].dataset.json).platform) &&
       (JSON.parse(nameDisplays[i].dataset.json).buy == bb || bb == null)) {
         matchingUsers.push(i);
       }
     } else {
       if(bidbuy[1].children[0].checked) { bb = false }
       if(bidbuy[2].children[0].checked) { bb = true }
-      if(JSON.parse(nameHolder.children[i].children[0].dataset.json).nickname.includes(searchText) 
+      if(JSON.parse(nameHolder.children[i].children[0].dataset.json).nickname.toLowerCase().includes(searchText.toLowerCase()) 
+      && selectPlatforms.includes(JSON.parse(nameDisplays[i].dataset.json).platform)
       && (JSON.parse(nameHolder.children[i].children[0].dataset.json).buy == bb || bb == null)) {
         matchingUsers.push(i);
       }
@@ -140,6 +142,15 @@ function changePage() {
   if(page > pages) { page = pages }
   else if(page <= 0) { page = 1 }
 
+  var waitTime = 10;
+  if(easy == 5) {
+    waitTime = 100;
+  } else if(easy == 10) {
+    waitTime = 50;
+  } else if(easy == 20) {
+    waitTime = 25;
+  }
+
   for(var i = 0; i < users; i++) {
     var a = document.createElement('a');
     a.setAttribute('href', '/nameDetails/' + JSON.parse(nameDisplays[i].dataset.json)._id);
@@ -150,15 +161,32 @@ function changePage() {
     section.addEventListener('mouseout', deleteNameDetail);
     if(matchingUsers.includes(i) && matchingUsers.findIndex(function(user) { return user == i }) >= (page - 1) * easy &&
     matchingUsers.findIndex(function(user) { return user == i }) < page * easy) {
-      section.className = 'usernameSale';
+      section.className = 'usernameSale btnStyle onPage';
+      section.style.opacity = 0;
     } else if(matchingUsers.includes(i)) {
-      section.className = 'usernameSale notOnPage';
+      section.className = 'usernameSale notOnPage btnStyle';
     } else {
-      section.className = 'usernameSale notOnPage';
+      section.className = 'usernameSale notOnPage btnStyle';
     }
     section.appendChild(a);
     document.getElementById('nameSelect').appendChild(section);
   }
+
+  var fadeInNamesCount = 0;
+  var fadeInNames = setInterval(function() {
+    if(fadeInNamesCount >= document.getElementsByClassName('onPage').length) {
+      clearInterval(fadeInNames);
+    } else {
+      anime({
+        targets: document.getElementsByClassName('onPage')[fadeInNamesCount],
+        opacity: {
+          value: 1,
+          duration: 1000
+        }
+      });
+    }
+    fadeInNamesCount++;
+  }, waitTime);
   
   document.getElementById('namePaginationMove').children[0].value = page;
   document.getElementById('namePaginationMove').children[0].max = pages;
@@ -166,6 +194,7 @@ function changePage() {
 }
 
 function displayNameDetail(evt) {
+  clearTimeout(showInstruct);
   var userData;
   try {
     userData = JSON.parse(evt.path[1].dataset.json);
@@ -196,11 +225,15 @@ function displayNameDetail(evt) {
   }
 }
 
+var showInstruct;
+
 function deleteNameDetail(evt) {
-  document.getElementById('nameDetail').innerHTML = `<h2 class="importantText center-text welcomeText">Welcome to the marketplace!</h2>
-  <p class="center-text welcomeText">The blue buttons you see in the center are the names, hover over them!</p>
-  <p class="center-text welcomeText">Above those is the platform selection. 
-  If you are looking for a name from a certain place, select it there!</p>`;
+  showInstruct = setTimeout(function() {
+    document.getElementById('nameDetail').innerHTML = `<h2 class="importantText center-text welcomeText">Welcome to the marketplace!</h2>
+    <p class="center-text welcomeText">The blue buttons you see in the center are the names, hover over them!</p>
+    <p class="center-text welcomeText">Above those is the platform selection. 
+    If you are looking for a name from a certain place, select it there!</p>`;
+  }, 400);
 }
 
-changePage();
+highlightborder(0);
